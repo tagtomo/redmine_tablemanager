@@ -6,7 +6,8 @@ class TmTablesController < ApplicationController
   before_filter :set_tm_table, only: [:edit, :update, :destroy]
 
   def index
-    @tm_tables = TmTable.all
+    #@tm_tables = TmTable.all
+    @tm_tables = TmTable.project_by(@project.name)
   end
 
   def show
@@ -15,6 +16,7 @@ class TmTablesController < ApplicationController
 
   def new
     @tm_table = TmTable.new
+    @tm_table.project_name = @project.name
     @tm_table.tm_table_columns.build
   end
 

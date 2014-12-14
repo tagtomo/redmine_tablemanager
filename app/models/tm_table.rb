@@ -5,6 +5,8 @@ class TmTable < ActiveRecord::Base
   has_many :tm_table_columns #,->{order("column_number ASC") }
   accepts_nested_attributes_for :tm_table_columns , allow_destroy: true
 
+  scope :project_by,  lambda { |project_name| where("project_name = ?", "#{project_name}") }
+
   def to_gentext
   	sfdata = "rails generate scaffold " + self[:table_name]
   	self.tm_table_columns.each do |tm_table_column|

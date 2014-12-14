@@ -6,6 +6,11 @@
 #get 'tm_tables/:id', :to => 'tm_tables#show' #, :as => :show
 Rails.application.routes.draw do
   resources :projects do
-    resources :tm_tables
+    resources :tm_tables do
+	    member do
+	      get 'getgentext'
+	      get 'getlocaleyml'
+	    end
+	  end
   end
 end
