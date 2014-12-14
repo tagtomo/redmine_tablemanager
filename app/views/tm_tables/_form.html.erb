@@ -1,0 +1,65 @@
+<%= form_for([@project,@tm_table], :html => {:class => "form-horizontal",:role=>"form"}) do |f| %>
+  <% if @tm_table.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tm_table.errors.count, "error") %> prohibited this tm_table from being saved:</h2>
+
+      <ul>
+      <% @tm_table.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div >
+    <table class="table table-striped table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+            <th><%= f.label :project_name %></th>
+            <th><%= f.label :table_name %></th>
+            <th><%= f.label :table_name_jp %></th>
+            <th><%= f.label :revision_number %></th>
+            <th><%= f.label :note %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="field form-group"><%= f.text_field :project_name %></div></td>
+          <td><div class="field"><%= f.text_field :table_name %></div></td>
+          <td><div class="field"><%= f.text_field :table_name_jp %></div></td>
+          <td><div class="field"><%= f.text_field :revision_number %></div></td>
+          <td><div class="field"><%= f.text_area :note %></div></td>
+        </tr>
+      </tbody>
+    </table>
+　　  <h2><%= t('activerecord.models.tm_table_column') %></h2>
+    <table class="table table-striped table-bordered table-hover table-condensed">
+      <thead>
+        <tr  class="detail_label">
+          <th><%= t('activerecord.attributes.tm_table_column.column_number')  %></th>
+          <th><%= t('activerecord.attributes.tm_table_column.column_name')  %></th>
+          <th><%= t('activerecord.attributes.tm_table_column.column_name_jp')  %></th>
+          <th><%= t('activerecord.attributes.tm_table_column.column_type')  %></th>
+          <th><%= t('activerecord.attributes.tm_table_column.column_size')  %></th>
+          <th><%= t('activerecord.attributes.tm_table_column.column_null')  %></th>
+          <th><%= t('activerecord.attributes.tm_table_column.column_default')  %></th>
+          <th><%= t('activerecord.attributes.tm_table_column.column_p_key')  %></th>
+          <th><%= t('activerecord.attributes.tm_table_column.column_f_key')  %></th>
+          <th><%= t('activerecord.attributes.tm_table_column.note')  %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.fields_for :tm_table_columns do |det| %>
+          <%= render "tm_table_column_fields", f: det %>
+        <% end %>
+      </tbody>
+    </table>
+    <input value="↑" type="button" class="upList btn btn-xs btn-default" />
+    <input value="↓" type="button" class="downList btn btn-xs btn-default" />
+    <%= button_tag_add_fields "+", f, "addList btn btn-xs btn-default" ,:tm_table_columns %>
+    <input value="-" type="button" class="removeList btn btn-xs btn-default" />
+    <div class="actions">
+      <%= f.submit class: 'btn btn-xs btn-default' %>
+    </div>
+  </div>
+
+<% end %>

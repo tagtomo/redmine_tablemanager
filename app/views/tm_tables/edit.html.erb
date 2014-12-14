@@ -1,0 +1,9 @@
+<%= javascript_include_tag "tm_tables.js", :plugin => "redmine_tablemanager" %>
+<%= stylesheet_link_tag 'tm_tables', :plugin => 'redmine_tablemanager' %>
+
+<h1>Editing <%= t('activerecord.models.tm_table') %></h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', project_tm_table_path(@project,@tm_table) , class: "btn btn-xs btn-default"%> |
+<%= link_to 'Back', project_tm_tables_path(@project) , class: "btn btn-xs btn-default"%>

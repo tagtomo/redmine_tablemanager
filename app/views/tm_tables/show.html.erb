@@ -1,0 +1,74 @@
+<%= javascript_include_tag "tm_tables.js", :plugin => "redmine_tablemanager" %>
+<%= stylesheet_link_tag 'tm_tables', :plugin => 'redmine_tablemanager' %>
+
+<p id="notice"><%= notice %></p>
+<h1>Show <%= t('activerecord.models.tm_table') %></h1>
+
+<p>
+    <table class="table table-striped table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+            <th><strong><%= t('activerecord.attributes.tm_table.project_name') %></strong></th>
+            <th><strong><%= t('activerecord.attributes.tm_table.table_name') %></th>
+            <th><strong><%= t('activerecord.attributes.tm_table.table_name_jp') %></strong></th>
+            <th><strong><%= t('activerecord.attributes.tm_table.revision_number') %></strong></th>
+            <th><strong><%= t('activerecord.attributes.tm_table.note') %></strong></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @tm_table.project_name %></td>
+          <td><%= @tm_table.table_name %></td>
+          <td><%= @tm_table.table_name_jp %></div></td>
+          <td><%= @tm_table.revision_number %></td>
+          <td><%= @tm_table.note %></td>
+        </tr>
+      </tbody>
+    </table>
+</p>
+
+<p>
+  <h2><%= t('activerecord.models.tm_table_column') %></h2>
+  <table class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+      <th><%= t('activerecord.attributes.tm_table_column.column_number') %></th>
+      <th><%= t('activerecord.attributes.tm_table_column.column_name') %></th>
+      <th><%= t('activerecord.attributes.tm_table_column.column_name_jp') %></th>
+      <th><%= t('activerecord.attributes.tm_table_column.column_type') %></th>
+      <th><%= t('activerecord.attributes.tm_table_column.column_size') %></th>
+      <th><%= t('activerecord.attributes.tm_table_column.column_null') %></th>
+      <th><%= t('activerecord.attributes.tm_table_column.column_default') %></th>
+      <th><%= t('activerecord.attributes.tm_table_column.column_p_key') %></th>
+      <th><%= t('activerecord.attributes.tm_table_column.column_f_key') %></th>
+      <th><%= t('activerecord.attributes.tm_table_column.note') %></th>
+    </tr>
+    <% if @tm_table %>
+      <% @tm_table.tm_table_columns.each do |rec| %>
+        <tr>
+          <td><%= rec.column_number %></td>
+          <td><%= rec.column_name %></td>
+          <td><%= rec.column_name_jp %></td>
+          <td><%= rec.column_type %></td>
+          <td><%= rec.column_size %></td>
+          <td><%= rec.column_null %></td>
+          <td><%= rec.column_default %></td>
+          <td><%= rec.column_p_key %></td>
+          <td><%= rec.column_f_key %></td>
+          <td><%= rec.note %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+</p>
+
+<%= hidden_field :tm_table, :table_name %>
+
+
+<%= link_to 'Edit', edit_project_tm_table_path(@project,@tm_table) , class: "btn btn-xs btn-default"%> |
+<%= link_to 'Back', project_tm_tables_path(@project) , class: "btn btn-xs btn-default"%>
+<%= button_tag 'gen', class: "getgentext btn btn-xs btn-default"%>
+<%= button_tag 'localeyml', class: "getlocaleyml btn btn-xs btn-default"%>
+
+<div id='disp'>
+  <pre id='targetpre'><code id='targetcode'></code></pre>
+</div>
