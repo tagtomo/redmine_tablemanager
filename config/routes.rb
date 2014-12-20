@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 	    member do
 	      get 'getgentext'
 	      get 'getlocaleyml'
+	      get 'commit'
 	    end
 	  end
   end

@@ -18,7 +18,11 @@
         <tr>
           <td><%= @tm_table.table_name %></td>
           <td><%= @tm_table.table_name_jp %></div></td>
-          <td><%= @tm_table.revision_number %></td>
+          <td><%= @tm_table.revision_number %>
+              <% if @tm_table.revision_number == "no commit" then %>
+              <%= link_to 'Commit', commit_project_tm_table_path(@project,@tm_table) , class: "btn btn-xs btn-default"%>
+              <% end %>
+          </td>
           <td><%= @tm_table.note %></td>
         </tr>
       </tbody>
@@ -66,6 +70,14 @@
 <%= link_to 'Back', project_tm_tables_path(@project) , class: "btn btn-xs btn-default"%>
 <%= button_tag 'gen', class: "getgentext btn btn-xs btn-default"%>
 <%= button_tag 'localeyml', class: "getlocaleyml btn btn-xs btn-default"%>
+
+<br>
+
+<div>
+  <%= render 'revlist' %>
+</div>
+
+<br>
 
 <div id='disp'>
   <pre id='targetpre'><code id='targetcode'></code></pre>

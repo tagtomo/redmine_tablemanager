@@ -6,8 +6,7 @@ class TmTablesController < ApplicationController
   before_filter :set_tm_table, only: [:edit, :update, :destroy]
 
   def index
-    #@tm_tables = TmTable.all
-    @tm_tables = TmTable.project_by(@project.name)
+    @tm_tables = TmTable.all
   end
 
   def show
@@ -21,6 +20,12 @@ class TmTablesController < ApplicationController
   end
 
   def edit
+  end
+
+  def commit
+    @tm_table = TmTable.find(params[:id])
+    @tm_table.commit
+    render "show"
   end
 
   def create

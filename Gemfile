@@ -1,0 +1,1 @@
+gem 'composite_primary_keys'
