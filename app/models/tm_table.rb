@@ -1,10 +1,11 @@
 class TmTable < ActiveRecord::Base
   unloadable
 
-  attr_accessible :project_name, :table_name, :table_name_jp, :revision_number, :note, :tm_table_columns_attributes
+  attr_accessible :project_name, :table_name, :table_name_jp, :revision_number, :note, :tm_table_columns_attributes, :tm_table_histories_attributes
   has_many :tm_table_columns #,->{order("column_number ASC") }
-  has_many :tm_table_histories, foreign_key: [:project_name, :table_name],primary_key: [:project_name, :table_name]
+  has_many :tm_table_histories, foreign_key: [:project_name, :table_name],primary_key: [:project_name, :table_name]#, allow_destroy: true
   accepts_nested_attributes_for :tm_table_columns , allow_destroy: true
+  accepts_nested_attributes_for :tm_table_histories , allow_destroy: true
 
   scope :project_by,  lambda { |project_name| where("project_name = ?", "#{project_name}") }
   scope :table_name_by,  lambda { |table_name| where("table_name = ?", "#{table_name}") }
@@ -17,7 +18,7 @@ class TmTable < ActiveRecord::Base
   def commit
 
     if self.tm_table_histories.exists?
-      self.revision_number = (tm_table_histories.maximum(:revision_number).to_i + 1).to_s
+      self.revision_number = (self.tm_table_histories.maximum("to_number(revision_number,'999999')").to_i + 1).to_s
     else
       self.revision_number = "1"
     end
@@ -28,7 +29,14 @@ class TmTable < ActiveRecord::Base
     #履歴番号を設定
     #data_attributes.merge!(history_no)
     new_history = self.tm_table_histories.new(data_attributes)
+
+    self.tm_table_columns.each do |tm_table_column|
+      column_data_attributes = tm_table_column.attributes.except "id","tm_table_id","created_at","updated_at"
+      new_history.tm_table_column_histories.new(column_data_attributes)
+    end
+
     new_history.save
+
     self.update_column( :revision_number ,self.revision_number )
   end
 

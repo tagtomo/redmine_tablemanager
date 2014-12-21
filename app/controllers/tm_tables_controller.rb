@@ -47,7 +47,7 @@ class TmTablesController < ApplicationController
     respond_to do |format|
       #if @tm_table.update(tm_table_params)
       #if @tm_table.update(params[:tm_table])
-       if @tm_table.update_attributes(params[:tm_table])
+      if @tm_table.update_attributes(params[:tm_table])
         format.html { redirect_to [@project,@tm_table], notice: 'Tm table was successfully updated.' }
         #format.json { render :show, status: :ok, location: @tm_table }
       else
@@ -60,7 +60,7 @@ class TmTablesController < ApplicationController
   def destroy
     @tm_table.destroy
     respond_to do |format|
-      format.html { redirect_to tm_tables_url, notice: 'Tm table was successfully destroyed.' }
+      format.html { redirect_to [@project,@tm_table], notice: 'Tm table was successfully destroyed.' }
       #format.json { head :no_content }
     end
   end

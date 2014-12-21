@@ -23,11 +23,11 @@
       </thead>
       <tbody>
         <tr>
-          <td><div class="field form-group"><%= f.text_field :project_name %></div></td>
+          <td><div class="field form-group" ><%= f.text_field :project_name ,:readonly => true %></div></td>
           <td><div class="field"><%= f.text_field :table_name %></div></td>
           <td><div class="field"><%= f.text_field :table_name_jp %></div></td>
-          <td><div class="field"><%= f.text_field :revision_number %></div></td>
-          <td><div class="field"><%= f.text_area :note %></div></td>
+          <td><div class="field" ><%= f.text_field :revision_number,:readonly => true  %></div></td>
+          <td><div class="field" ><%= f.text_area :note,:readonly => true %></div></td>
         </tr>
       </tbody>
     </table>
