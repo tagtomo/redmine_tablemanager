@@ -1,4 +1,7 @@
 ja:
+  label_redmine_tablemanager: TBM
+  project_module_redmine_tablemanager: TBMプラグイン
+
   activerecord:
     models:
       tm_table: テーブル
@@ -9,6 +12,7 @@ ja:
         table_name_jp: 日本語テーブル名
         revision_number: リビジョン
         note: 備考
+
   activerecord:
     models:
       tm_table_column: 項目
