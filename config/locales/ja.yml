@@ -5,6 +5,7 @@ ja:
   activerecord:
     models:
       tm_table: テーブル
+      tm_table_column: 項目
     attributes:
       tm_table:
         project_name: ＰＪ名
@@ -12,11 +13,6 @@ ja:
         table_name_jp: 日本語テーブル名
         revision_number: リビジョン
         note: 備考
-
-  activerecord:
-    models:
-      tm_table_column: 項目
-    attributes:
       tm_table_column:
         column_number: 連番
         column_name: 項目名
@@ -29,3 +25,18 @@ ja:
         column_f_key: ユニークキー
         note: 備考
         tm_table_id: テーブルＩＤ
+
+  helpers:
+    actions: "機能"
+    links:
+      back: "戻る"
+      cancel: "中断"
+      confirm: "Are you sure?"
+      destroy: "削除"
+      new: "登録"
+      edit: "修正"
+    titles:
+      edit: "Edit %{model}"
+      save: "Save %{model}"
+      new: "New %{model}"
+      delete: "Delete %{model}"
