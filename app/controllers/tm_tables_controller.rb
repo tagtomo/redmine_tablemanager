@@ -6,7 +6,7 @@ class TmTablesController < ApplicationController
   before_filter :set_tm_table, only: [:edit, :update, :destroy]
 
   def index
-    @tm_tables = TmTable.all
+    @tm_tables = TmTable.find_all_by_project_name(params[:project_id])
   end
 
   def show
