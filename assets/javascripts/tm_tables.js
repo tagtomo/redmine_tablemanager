@@ -2,21 +2,23 @@ jQuery(function() {
   $(document).on("click", ".detail", function(event) {
     var select_num;
     select_num = parseInt($('.detail').index(this));
-    if ($('.detail').eq(select_num).hasClass("selected")) {
-      return $('.detail').eq(select_num).removeClass("selected");
+    if ($('.detail').eq(select_num).hasClass("tbm_selected")) {
+      $('.detail').eq(select_num).removeClass("active");
+      return $('.detail').eq(select_num).removeClass("tbm_selected");
     } else {
-      return $('.detail').eq(select_num).addClass("selected");
+      $('.detail').eq(select_num).addClass("active");
+      return $('.detail').eq(select_num).addClass("tbm_selected");
     }
   });
   $(document).on("click", ".removeList", function(event) {
-    if ($('.selected').length === 0) {
+    if ($('.tbm_selected').length === 0) {
       alert("明細が未選択です。");
       return;
     }
-    $('.selected').children("input[name*='_destroy']").val('1');
-    $('.selected').closest('tr').hide();
-    $('.selected').addClass("deleted");
-    $('.selected').removeClass("selected");
+    $('.tbm_selected').children("input[name*='_destroy']").val('1');
+    $('.tbm_selected').closest('tr').hide();
+    $('.tbm_selected').addClass("deleted");
+    $('.tbm_selected').removeClass("tbm_selected");
     $.update_index();
     return event.preventDefault();
   });
@@ -34,30 +36,30 @@ jQuery(function() {
     return event.preventDefault();
   });
   $(document).on("click", ".upList", function(event) {
-    if ($('.selected').length === 0) {
+    if ($('.tbm_selected').length === 0) {
       alert("明細が未選択です。");
       return;
     }
-    if ($('.selected').length > 2) {
+    if ($('.tbm_selected').length > 1) {
       alert("複数選択での操作は行えません。");
       return;
     }
-    console.log($('.selected').length);
-    $('.selected').insertBefore($('.selected').prev());
+    console.log($('.tbm_selected').length);
+    $('.tbm_selected').insertBefore($('.tbm_selected').prev());
     $.update_index();
     return event.preventDefault();
   });
   $(document).on("click", ".downList", function(event) {
-    if ($('.selected').length === 0) {
+    if ($('.tbm_selected').length === 0) {
       alert("明細が未選択です。");
       return;
     }
-    if ($('.selected').length > 2) {
+    if ($('.tbm_selected').length > 1) {
       alert("複数選択での操作は行えません。");
       return;
     }
-    console.log($('.selected').length);
-    $('.selected').insertAfter($('.selected').next());
+    console.log($('.tbm_selected').length);
+    $('.tbm_selected').insertAfter($('.tbm_selected').next());
     $.update_index();
     return event.preventDefault();
   });
