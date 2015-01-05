@@ -14,6 +14,10 @@ class TmTable < ActiveRecord::Base
 
   before_save :rev_set #更新時（create,update時に規定値をセットする）
 
+  validates :project_name, :presence => true
+  validates :table_name, :presence => true
+  validates :table_name_jp, :presence => true
+
   #コミット処理
   def commit
 
