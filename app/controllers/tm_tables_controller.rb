@@ -15,7 +15,7 @@ class TmTablesController < ApplicationController
 
   def new
     @tm_table = TmTable.new
-    @tm_table.project_name = @project.name
+    @tm_table.project_name = @project.identifier
     @tm_table.tm_table_columns.build
   end
 
